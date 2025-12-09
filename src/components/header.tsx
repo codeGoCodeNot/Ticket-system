@@ -2,6 +2,7 @@ import { Kanban } from "lucide-react";
 import { homePath, ticketsPath } from "../paths";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import ThemeSwitcher from "./theme/theme-switcher";
 
 const Header = () => {
   return (
@@ -13,16 +14,20 @@ const Header = () => {
             w-full flex py-2.5 px-5 justify-between
           "
     >
-      <Button asChild variant="ghost">
-        <Link href={homePath()}>
-          <Kanban />
-          <h1 className="text-lg font-semibold ml-2">TicketBounty</h1>
-        </Link>
-      </Button>
-
-      <Button asChild variant="default">
-        <Link href={ticketsPath()}>Tickets</Link>
-      </Button>
+      <div className="flex items-center gap-x-2">
+        <Button asChild variant="ghost">
+          <Link href={homePath()}>
+            <Kanban />
+            <h1 className="text-lg font-semibold ml-2">TicketBounty</h1>
+          </Link>
+        </Button>
+      </div>
+      <div className="flex items-center gap-x-2">
+        <ThemeSwitcher />
+        <Button asChild variant="default">
+          <Link href={ticketsPath()}>Tickets</Link>
+        </Button>
+      </div>
     </nav>
   );
 };

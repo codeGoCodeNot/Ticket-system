@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Link from "next/link";
-import { homePath, ticketsPath } from "../paths";
-import { Button } from "@/src/components/ui/button";
-import { Kanban } from "lucide-react";
 import Header from "../components/header";
+import ThemeProvider from "../components/theme/theme-provider";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,17 +29,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        <main
-          className="
+        <ThemeProvider>
+          <Header />
+          <main
+            className="
           min-h-screen flex-1
           overflow-y-auto overflow-x-hidden
           py-24 px-8
           flex flex-col
           "
-        >
-          {children}
-        </main>
+          >
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );

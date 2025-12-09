@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { homePath, ticketsPath } from "../paths";
+import { Button } from "@/src/components/ui/button";
+import { Kanban } from "lucide-react";
+import Header from "../components/header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,32 +32,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <nav
-          className="
-            supports-backdrop-blur:bg-background/60
-            fixed left-0 right-0 top-0 z-20
-            border-b backdrop-blur
-            w-full flex py-2.5 px-5 justify-between
-          "
-        >
-          <div>
-            <Link href={homePath()} className="text-lg font-bold">
-              Home
-            </Link>
-          </div>
-          <div>
-            <Link href={ticketsPath()} className="text-sm underline">
-              Tickets
-            </Link>
-          </div>
-        </nav>
+        <Header />
         <main
           className="
-        min-h-screen flex-1
-        overflow-y-auto overflow-x-hidden
-        py-24 px-8
-        flex flex-col
-        "
+          min-h-screen flex-1
+          overflow-y-auto overflow-x-hidden
+          py-24 px-8
+          flex flex-col
+          "
         >
           {children}
         </main>

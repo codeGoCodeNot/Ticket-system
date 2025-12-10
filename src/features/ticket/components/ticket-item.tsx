@@ -7,11 +7,11 @@ import {
 import { ticketPath } from "@/src/paths";
 
 import Link from "next/link";
-import { Ticket } from "../../type";
 import { TICKET_ICONS } from "../../constants";
 import { SquareArrowOutUpRight } from "lucide-react";
 import { Button } from "@/src/components/ui/button";
 import clsx from "clsx";
+import { Ticket } from "@/src/generated/prisma/client";
 
 type TicketItemProps = {
   ticket: Ticket;

@@ -8,6 +8,7 @@ import { Ticket } from "@/src/generated/prisma/client";
 import { Label } from "@radix-ui/react-label";
 import { useActionState } from "react";
 import { upsertTicket } from "../actions/upsert-ticket";
+import { EMPTY_ACTION_STATE } from "@/src/components/form/utils/to-action-state";
 
 type TicketUpsertFormProps = {
   ticket?: Ticket;
@@ -16,10 +17,7 @@ type TicketUpsertFormProps = {
 const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
   const [actionState, action] = useActionState(
     upsertTicket.bind(null, ticket?.id),
-    {
-      message: "",
-      fieldErrors: {},
-    }
+    EMPTY_ACTION_STATE
   );
 
   return (

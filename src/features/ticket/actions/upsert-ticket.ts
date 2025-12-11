@@ -2,8 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import prisma from "@/src/lib/prisma";
 import { ticketsPath, ticketPath } from "@/src/paths";
+import prisma from "@/src/lib/prisma";
 
 export const upsertTicket = async (
   id: string | undefined,

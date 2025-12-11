@@ -5,15 +5,18 @@ import { redirect } from "next/navigation";
 import { ticketsPath, ticketPath } from "@/src/paths";
 import prisma from "@/src/lib/prisma";
 import { z } from "zod";
+import fromErrorToActionState, {
+  type ActionState,
+} from "@/src/components/form/utils/to-action-state";
 
 const upsertTicketSchema = z.object({
-  title: z.string().min(1).max(191),
-  content: z.string().min(1).max(1024),
+  title: z.string().trim().min(1).max(191),
+  content: z.string().trim().min(1).max(1024),
 });
 
 export const upsertTicket = async (
   id: string | undefined,
-  _actionState: { message: string; payload?: FormData },
+  _actionState: ActionState,
   formData: FormData
 ) => {
   try {
@@ -28,8 +31,7 @@ export const upsertTicket = async (
       create: data,
     });
   } catch (error) {
-    console.error(error);
-    return { message: "Something went wrong", payload: formData };
+    return fromErrorToActionState(error, formData);
   }
 
   revalidatePath(ticketsPath());

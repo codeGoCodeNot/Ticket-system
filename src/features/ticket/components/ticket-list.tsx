@@ -3,7 +3,6 @@ import TicketItem from "./ticket-item";
 
 const TicketList = async () => {
   const tickets = await getTickets();
-  console.log(tickets);
 
   return (
     <div

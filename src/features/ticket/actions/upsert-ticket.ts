@@ -10,8 +10,18 @@ import fromErrorToActionState, {
 } from "@/src/components/form/utils/to-action-state";
 
 const upsertTicketSchema = z.object({
-  title: z.string().trim().min(1).max(191),
-  content: z.string().trim().min(1).max(1024),
+  title: z
+    .string()
+    .trim()
+    .min(1, { message: "Title must have at least 1 character" })
+    .max(191, { message: "Title can be at most 191 characters" }),
+  content: z
+    .string()
+    .trim()
+    .min(1, {
+      message: "Content must have at least 1 character",
+    })
+    .max(1024, { message: "Content can be at most 1024 characters" }),
 });
 
 export const upsertTicket = async (
@@ -40,5 +50,5 @@ export const upsertTicket = async (
     redirect(ticketPath(id));
   }
 
-  return { message: "Ticket created" };
+  return { message: "Ticket created", fieldErrors: {} };
 };

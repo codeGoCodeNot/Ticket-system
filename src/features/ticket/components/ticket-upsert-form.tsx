@@ -1,15 +1,16 @@
 "use client";
 
 import FieldErrors from "@/src/components/form/field-error";
+import useActionFeedback from "@/src/components/form/hooks/use-action-feedback";
 import SubmitButton from "@/src/components/form/submit-button";
+import { EMPTY_ACTION_STATE } from "@/src/components/form/utils/to-action-state";
 import { Input } from "@/src/components/ui/input";
 import { Textarea } from "@/src/components/ui/textarea";
 import { Ticket } from "@/src/generated/prisma/client";
 import { Label } from "@radix-ui/react-label";
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import { upsertTicket } from "../actions/upsert-ticket";
-import { EMPTY_ACTION_STATE } from "@/src/components/form/utils/to-action-state";
-import useActionFeedback from "@/src/components/form/hooks/use-action-feedback";
+import { toast } from "sonner";
 
 type TicketUpsertFormProps = {
   ticket?: Ticket;
@@ -22,11 +23,15 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
   );
 
   useActionFeedback(actionState, {
-    onSuccess: () => {
-      console.log(actionState.message);
+    onSuccess: ({ actionState }) => {
+      if (actionState.message) {
+        toast.success(actionState.message);
+      }
     },
-    onError: () => {
-      console.log(actionState.message);
+    onError: ({ actionState }) => {
+      if (actionState.message) {
+        toast.error(actionState.message);
+      }
     },
   });
 

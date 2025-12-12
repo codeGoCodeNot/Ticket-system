@@ -1,7 +1,7 @@
 "use client";
 
 import FieldErrors from "@/src/components/form/field-error";
-import useActionFeedback from "@/src/components/form/hooks/use-action-feedback";
+import Form from "@/src/components/form/form";
 import SubmitButton from "@/src/components/form/submit-button";
 import { EMPTY_ACTION_STATE } from "@/src/components/form/utils/to-action-state";
 import { Input } from "@/src/components/ui/input";
@@ -10,7 +10,6 @@ import { Ticket } from "@/src/generated/prisma/client";
 import { Label } from "@radix-ui/react-label";
 import { useActionState } from "react";
 import { upsertTicket } from "../actions/upsert-ticket";
-import { toast } from "sonner";
 
 type TicketUpsertFormProps = {
   ticket?: Ticket;
@@ -22,21 +21,8 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
     EMPTY_ACTION_STATE
   );
 
-  useActionFeedback(actionState, {
-    onSuccess: ({ actionState }) => {
-      if (actionState.message) {
-        toast.success(actionState.message);
-      }
-    },
-    onError: ({ actionState }) => {
-      if (actionState.message) {
-        toast.error(actionState.message);
-      }
-    },
-  });
-
   return (
-    <form action={action} className="flex flex-col gap-y-2">
+    <Form action={action} actionState={actionState}>
       <Label htmlFor="title">Title</Label>
       <Input
         type="text"
@@ -58,7 +44,7 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
       />
       <FieldErrors actionState={actionState} name="content" />
       <SubmitButton label={ticket ? "Edit" : "Create"} />
-    </form>
+    </Form>
   );
 };
 

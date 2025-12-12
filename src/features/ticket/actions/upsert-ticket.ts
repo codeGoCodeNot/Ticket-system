@@ -24,6 +24,8 @@ const upsertTicketSchema = z.object({
       message: "Content must have at least 1 character",
     })
     .max(1024, { message: "Content can be at most 1024 characters" }),
+  deadline: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Is required"), // date validator
+  bounty: z.coerce.number().positive(), // to accept '123' to 123
 });
 
 export const upsertTicket = async (
@@ -35,6 +37,8 @@ export const upsertTicket = async (
     const data = upsertTicketSchema.parse({
       title: formData.get("title"),
       content: formData.get("content"),
+      deadline: formData.get("deadline"),
+      bounty: formData.get("bounty"),
     });
 
     await prisma.ticket.upsert({

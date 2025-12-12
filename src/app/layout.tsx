@@ -4,6 +4,7 @@ import Header from "../components/header";
 import ThemeProvider from "../components/theme/theme-provider";
 import "./globals.css";
 import { Toaster } from "sonner";
+import RedirectToast from "../components/redirect-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,6 +44,7 @@ export default function RootLayout({
             {children}
           </main>
           <Toaster expand />
+          <RedirectToast />
         </ThemeProvider>
       </body>
     </html>

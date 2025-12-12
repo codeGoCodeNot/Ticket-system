@@ -3,8 +3,11 @@
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { deleteCookieByKey, getCookieByKey } from "../actions/cookies";
+import { usePathname } from "next/navigation";
 
 const RedirectToast = () => {
+  const pathname: string = usePathname();
+
   useEffect(() => {
     const showCookieToast = async () => {
       const message = await getCookieByKey("toast");
@@ -15,7 +18,7 @@ const RedirectToast = () => {
     };
 
     showCookieToast();
-  }, []);
+  }, [pathname]);
 
   return null;
 };

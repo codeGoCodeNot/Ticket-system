@@ -1,5 +1,6 @@
 import CardCompact from "@/src/components/card-compact";
 import Heading from "@/src/components/heading";
+import RedirectToast from "@/src/components/redirect-toast";
 import Spinner from "@/src/components/spinner";
 import { Separator } from "@/src/components/ui/separator";
 import TicketList from "@/src/features/ticket/components/ticket-list";
@@ -24,6 +25,8 @@ const TicketsPage = async () => {
           <TicketList />
         </Suspense>
       </div>
+
+      <RedirectToast />
     </>
   );
 };

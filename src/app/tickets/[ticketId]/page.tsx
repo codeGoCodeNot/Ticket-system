@@ -1,3 +1,4 @@
+import RedirectToast from "@/src/components/redirect-toast";
 import { getTicket } from "@/src/features/queries/get-ticket";
 import TicketItem from "@/src/features/ticket/components/ticket-item";
 import { notFound } from "next/navigation";
@@ -19,6 +20,8 @@ const TicketPage = async ({ params }: TicketPageProps) => {
       <div className="flex justify-center animate-fade-from-top">
         <TicketItem ticket={ticket} isDetail />
       </div>
+
+      <RedirectToast />
     </>
   );
 };

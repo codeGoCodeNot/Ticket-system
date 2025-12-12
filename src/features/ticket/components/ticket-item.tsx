@@ -14,6 +14,7 @@ import Link from "next/link";
 import { TICKET_ICONS } from "../../constants";
 import deleteTicket from "../actions/delete-ticket";
 import { Pencil } from "lucide-react";
+import { toCurrencyFromCent } from "@/src/utils/currency";
 
 type TicketItemProps = {
   ticket: Ticket;
@@ -71,7 +72,9 @@ const TicketItem = ({ ticket, isDetail }: TicketItemProps) => {
           </CardContent>
           <CardFooter className="flex justify-between">
             <p className="text-sm text-muted-foreground">{ticket.deadline}</p>
-            <p className="text-sm text-muted-foreground">{ticket.bounty}</p>
+            <p className="text-sm text-muted-foreground">
+              {toCurrencyFromCent(ticket.bounty)}
+            </p>
           </CardFooter>
         </Card>
 

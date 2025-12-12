@@ -22,6 +22,11 @@ datasource: {
 url: env("DIRECT_URL"),
 },
 
+# currency
+
+-- pnpm install big.js
+-- pnpm install @types/big.js
+
 then run
 
 -- npx prisma migrate dev --name init

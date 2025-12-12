@@ -10,6 +10,7 @@ import fromErrorToActionState, {
   type ActionState,
 } from "@/src/components/form/utils/to-action-state";
 import { setCookieByKey } from "@/src/actions/cookies";
+import { toCent } from "@/src/utils/currency";
 
 const upsertTicketSchema = z.object({
   title: z
@@ -41,10 +42,15 @@ export const upsertTicket = async (
       bounty: formData.get("bounty"),
     });
 
+    const dbData = {
+      ...data,
+      bounty: toCent(data.bounty),
+    };
+
     await prisma.ticket.upsert({
       where: { id: id || "" },
-      update: data,
-      create: data,
+      update: dbData,
+      create: dbData,
     });
   } catch (error) {
     return fromErrorToActionState(error, formData);

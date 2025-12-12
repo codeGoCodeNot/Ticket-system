@@ -10,6 +10,7 @@ import { Ticket } from "@/src/generated/prisma/client";
 import { Label } from "@radix-ui/react-label";
 import { useActionState } from "react";
 import { upsertTicket } from "../actions/upsert-ticket";
+import { fromCent } from "@/src/utils/currency";
 
 type TicketUpsertFormProps = {
   ticket?: Ticket;
@@ -51,7 +52,8 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
             id="deadline"
             name="deadline"
             defaultValue={
-              (actionState.payload?.get("deadline") as string) ?? ticket?.title
+              (actionState.payload?.get("deadline") as string) ??
+              ticket?.deadline
             }
           />
           <FieldErrors actionState={actionState} name="deadline" />
@@ -64,7 +66,8 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
             name="bounty"
             step=".01"
             defaultValue={
-              (actionState.payload?.get("deadline") as string) ?? ticket?.title
+              (actionState.payload?.get("bounty") as string) ??
+              (ticket?.bounty ? fromCent(ticket?.bounty) : "")
             }
           />
           <FieldErrors actionState={actionState} name="deadline" />

@@ -1,5 +1,6 @@
 "use server";
 
+import { setCookieByKey } from "@/src/actions/cookies";
 import prisma from "@/src/lib/prisma";
 import { ticketsPath } from "@/src/paths";
 import { revalidatePath } from "next/cache";
@@ -13,6 +14,7 @@ const deleteTicket = async (id: string) => {
   });
 
   revalidatePath(ticketsPath());
+  setCookieByKey("toast", "Ticket deleted");
   redirect(ticketsPath());
 };
 

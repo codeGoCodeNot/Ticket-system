@@ -11,6 +11,7 @@ import { Label } from "@radix-ui/react-label";
 import { useActionState } from "react";
 import { upsertTicket } from "../actions/upsert-ticket";
 import { fromCent } from "@/src/utils/currency";
+import DatePicker from "@/src/components/ui/date-picker";
 
 type TicketUpsertFormProps = {
   ticket?: Ticket;
@@ -47,8 +48,7 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
       <div className="flex gap-x-2 mb-1">
         <div className="w-1/2">
           <Label htmlFor="deadline">Deadline</Label>
-          <Input
-            type="date"
+          <DatePicker
             id="deadline"
             name="deadline"
             defaultValue={
@@ -58,6 +58,7 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
           />
           <FieldErrors actionState={actionState} name="deadline" />
         </div>
+
         <div className="w-1/2">
           <Label htmlFor="bounty">Bounty ($)</Label>
           <Input

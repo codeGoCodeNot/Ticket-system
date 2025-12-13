@@ -6,6 +6,7 @@ import { Button } from "./button";
 import { Calendar } from "./calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { useState } from "react";
+import { fa } from "zod/v4/locales";
 
 type DatePickerProps = {
   id: string;
@@ -17,11 +18,16 @@ const DatePicker = ({ id, name, defaultValue }: DatePickerProps) => {
   const [date, setDate] = useState<Date | undefined>(
     defaultValue ? new Date(defaultValue) : new Date()
   );
-
+  const [open, setOpen] = useState<boolean>(false);
   const formattedStringDate = date ? format(date, "yyyy-MM-dd") : "";
 
+  const handleSelect = (selectedDate: Date | undefined) => {
+    setDate(selectedDate);
+    setOpen(false);
+  };
+
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger id={id} asChild className="w-full">
         <Button
           variant="outline"
@@ -34,7 +40,7 @@ const DatePicker = ({ id, name, defaultValue }: DatePickerProps) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
-        <Calendar mode="single" selected={date} onSelect={setDate} />
+        <Calendar mode="single" selected={date} onSelect={handleSelect} />
       </PopoverContent>
     </Popover>
   );

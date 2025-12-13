@@ -26,7 +26,9 @@ const upsertTicketSchema = z.object({
     })
     .max(1024, { message: "Content can be at most 1024 characters" }),
   deadline: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Is required"), // date validator
-  bounty: z.coerce.number().positive(), // to accept '123' to 123
+  bounty: z.coerce
+    .number()
+    .positive({ message: "Number must be greater than 0" }), // to accept '123' to 123
 });
 
 export const upsertTicket = async (

@@ -49,6 +49,7 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
         <div className="w-1/2">
           <Label htmlFor="deadline">Deadline</Label>
           <DatePicker
+            key={actionState.timestamp}
             id="deadline"
             name="deadline"
             defaultValue={
@@ -60,7 +61,7 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
         </div>
 
         <div className="w-1/2">
-          <Label htmlFor="bounty">Bounty ($)</Label>
+          <Label htmlFor="bounty">Bounty (₱)</Label>
           <Input
             type="number"
             id="bounty"
@@ -71,7 +72,7 @@ const TicketUpsertForm = ({ ticket }: TicketUpsertFormProps) => {
               (ticket?.bounty ? fromCent(ticket?.bounty) : "")
             }
           />
-          <FieldErrors actionState={actionState} name="deadline" />
+          <FieldErrors actionState={actionState} name="bounty" />
         </div>
       </div>
       <SubmitButton label={ticket ? "Edit" : "Create"} />
